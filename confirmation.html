@@ -64,16 +64,26 @@ document.getElementById('passengers').innerText = bookingData['passengers'];
 }
 }
 
-function handleSubmit() {
+function handleSubmit(event) {
+event.preventDefault();
 const bookingData = JSON.parse(localStorage.getItem('bookingData'));
 if (bookingData) {
-// Send booking data to server or email
-// Example: sendEmail(bookingData);
+const form = document.createElement('form');
+form.action = 'https://formspree.io/f/xwpkkbye';
+form.method = 'POST';
 
-// Send confirmation email to user
-// Example: sendConfirmationEmail(bookingData['email']);
+for (const key in bookingData) {
+if (bookingData.hasOwnPropertykey) {
+const input = document.createElement('input');
+input.type = 'hidden';
+input.name = key;
+input.value = bookingData[key];
+form.appendChild(input);
+}
+}
 
-alert('Booking confirmed and email sent!');
+document.body.appendChild(form);
+form.submit();
 }
 }
 
@@ -83,7 +93,6 @@ window.onload = populateBookingData;
 <body>
 <div class="confirmation-form">
 <h1>Booking Confirmation</h1>
-<form action="https://formspree.io/f/xwpkkbye" method="POST">
 <p><strong>First Name:</strong> <span id="first-name"></span></p>
 <p><strong>Last Name:</strong> <span id="last-name"></span></p>
 <p><strong>Email:</strong> <span id="email"></span></p>
@@ -94,8 +103,7 @@ window.onload = populateBookingData;
 <p><strong>Departure Date:</strong> <span id="departure-date"></span></p>
 <p><strong>Return Date:</strong> <span id="return-date"></span></p>
 <p><strong>Passengers:</strong> <span id="passengers"></span></p>
-<button type="submit">Book Now</button>
-</form>
+<button onclick="handleSubmit(event)">Book Now</button>
 </div>
 </body>
 </html>
