@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Search</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<style>
+#results {
+white-space: pre-wrap; /* JSON ডেটা সুন্দরভাবে প্রদর্শনের জন্য */
+}
+.flight {
+border: 1px solid #ccc;
+padding: 10px;
+margin: 10px 0;
+}
+.flight button {
+background-color: #4CAF50; /* Green */
+color: white;
+padding: 10px 20px;
+border: none;
+cursor: pointer;
+}
+.flight button:hover {
+background-color: #45a049;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<div class="row">
+<div class="pb-3 h3 text-left">Flight Search </div>
+</div>
+<form id="flight-form" onsubmit="return validateForm()">
+<div class="row">
+<div class="form-group col-md align-items-start flex-column">
+<label for="origin" class="d-inline-flex">From</label>
+<input type="text" placeholder="City or Airport" class="form-control" id="origin" name="origin" required>
+</div>
+<div class="form-group col-md align-items-start flex-column">
+<label for="depart" class="d-inline-flex">To</label>
+<input type="text" placeholder="City or Airport" class="form-control" id="depart" name="depart" required>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-md align-items-start flex-column">
+<label for="departure-date" class="d-inline-flex">Depart</label>
+<input type="date" class="form-control" id="departure-date" name="departure-date" onkeydown="return false" required>
+</div>
+<div class="form-group col-md align-items-start flex-column">
+<label for="return-date" class="d-inline-flex">Return</label>
+<input type="date" placeholder="One way" value="" onChange="this.setAttribute('value', this.value)" class="form-control" id="return-date" name="return-date">
+</div>
+</div>
+<div class="row">
+<div class="form-group col-lg-3 align-items-start flex-column">
+<label for="adults" class="d-inline-flex col-auto">Adults <span class="sublabel"> 12+ </span></label>
+<select class="form-select" id="adults" onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);">
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+<option value="9">9</option>
+</select>
+</div>
+<div class="form-group col-lg-3 align-items-start flex-column">
+<label for="children" class="d-inline-flex col-auto">Children <span class="sublabel"> 2-11 </span></label>
+<select class="form-select" id="children">
+<option value="0">0</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="3">3</option>
+<option value="4">4</option>
+<option value="5">5</option>
+<option value="6">6</option>
+<option value="7">7</option>
+<option value="8">8</option>
+</select>
+</div>
+<div class="form-group col-lg-3 align-items-start flex-column">
+<label for="infants" class="d-inline-flex col-auto">Infants <span class="sublabel"> less than 2</span></label>
+<select class="form-select" id="infants">
+<option value="0">0</option>
+<option value="1">1</option>
+</select>
+</div>
+</div>
+<div class="row">
+<div class="form-group col-lg-6 align-items-start flex-column">
+<label for="cabin" class="d-inline-flex">Cabin</label>
+<select class="form-select" id="cabin">
+<option value="ECONOMY">Economy</option>
+<option value="PREMIUM_ECONOMY">Premium Economy</option>
+<option value="BUSINESS">Business</option>
+<option value="FIRST">First</option>
+</select>
+</div>
+<div class="form-group col-lg-6 align-items-start flex-column pt-lg-4">
+<div class="form-check form-switch">
+<input class="form-check-input align-self-center" type="checkbox" id="directFlights">
+<label class="form-check-label d-inline-flex align-self-center" for="directFlights">Direct flights</label>
+</div>
+</div>
+</div>
+<div class="row">
+<div class="text-left col-auto">
+<button type="submit" class="btn btn-primary">Search flights</button>
+</div>
+</div>
+</form>
+<div id="results"></div>
+</div>
+
+<script>
+// এয়ারলাইনের পূর্ণ নামের ম্যাপ
+const airlineNames = {
+'BG': 'Biman Bangladesh Airlines',
+'SV': 'Saudi Arabian Airlines',
+'EK': 'Emirates',
+'QR': 'Qatar Airways',
+'EY': 'Etihad Airways'
+// অন্যান্য এয়ারলাইনের নাম এখানে যোগ করুন
+};
+
+// Access Token জেনারেট করার জন্য নিচের কোডটি ব্যবহার করুন
+fetch('https://test.api.amadeus.com/v1/security/oauth2/token', {
+method: 'POST',
+headers: {
+'Content-Type': 'application/x-www-form-urlencoded'
+},
+body: new URLSearchParams({
+'grant_type': 'client_credentials',
+'client_id': 'IAdRK7OA8APheG6fswXod39h9fiK52tz', // এখানে আপনার API Key বসান
+'client_secret': 'JxrFEAiPI3KfkL4R' // এখানে আপনার API Secret বসান
+})
+})
+.then(response => response.json())
+.then(data => {
+const accessToken = data.access_token;
+// Access Token ব্যবহার করে API কল করুন
+document.getElementById('flight-form').addEventListener('submit', function(event) {
+event.preventDefault();
+const origin = document.getElementById('origin').value;
+const destination = document.getElementById('depart').value;
+const departureDate = document.getElementById('departure-date').value;
+
+fetch(`https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${origin}&destinationLocationCode=${destination}&departureDate=${departureDate}&adults=1`, {
+method: 'GET',
+headers: {
+'Authorization': `Bearer ${accessToken}`
+}
+})
+.then(response => response.json())
+.then(data => {
+const resultsDiv = document.getElementById('results');
+resultsDiv.innerHTML = ''; // পূর্বের ফলাফল মুছে ফেলুন
+
+data.data.forEach(flight => {
+const flightDiv = document.createElement('div');
+flightDiv.classList.add('flight');
+
+const airlineCode = flight.validatingAirlineCodes[0];
+const airlineFullName = airlineNames[airlineCode] || 'Unknown Airline';
+const priceUSD = flight.price.total;
+const priceBDT = (priceUSD * 85).toFixed(2); // USD থেকে BDT রূপান্তর (প্রায় 85 BDT = 1 USD)
+const departureTime = flight.itineraries[0].segments[0].departure.at;
+const arrivalTime = flight.itineraries[0].segments[0].arrival.at;
+
+flightDiv.innerHTML = `
+<p><strong>Airline:</strong> ${airlineCode} (${airlineFullName})</p>
+<p><strong>Price:</strong> BDT ${priceBDT}</p>
+<p><strong>Departure Time:</strong> ${departureTime}</p>
+<p><strong>Arrival Time:</strong> ${arrivalTime}</p>
+<button onclick="alert('Booking functionality not implemented yet')">Book Now</button>
+`;
+
+resultsDiv.appendChild(flightDiv);
+});
+})
+.catch(error => console.error('Error:', error));
+});
+})
+.catch(error => console.error('Error:', error));
+</script>
+</body>
+</html>
