@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Flight Booking Form</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f2f2f2;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+.booking-form {
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+width: 300px;
+}
+.booking-form h2 {
+margin-bottom: 20px;
+font-size: 24px;
+color: #333;
+}
+.form-group {
+margin-bottom: 15px;
+}
+.form-group label {
+display: block;
+margin-bottom: 5px;
+color: #555;
+}
+.form-group input, .form-group select {
+width: 100%;
+padding: 8px;
+border: 1px solid #ccc;
+border-radius: 4px;
+}
+.form-group input[type="submit"] {
+background-color: #4CAF50;
+color: white;
+border: none;
+cursor: pointer;
+}
+.form-group input[type="submit"]:hover {
+background-color: #45a049;
+}
+</style>
+</head>
+<body>
+<div class="booking-form">
+<h2>Flight Booking</h2>
+<form>
+<div class="form-group">
+<label for="from">From:</label>
+<input type="text" id="from" name="from" required>
+</div>
+<div class="form-group">
+<label for="to">To:</label>
+<input type="text" id="to" name="to" required>
+</div>
+<div class="form-group">
+<label for="departure">Departure Date:</label>
+<input type="date" id="departure" name="departure" required>
+</div>
+<div class="form-group">
+<label for="return">Return Date:</label>
+<input type="date" id="return" name="return">
+</div>
+<div class="form-group">
+<label for="class">Class:</label>
+<select id="class" name="class">
+<option value="economy">Economy</option>
+<option value="business">Business</option>
+<option value="first">First Class</option>
+</select>
+</div>
+<div class="form-group">
+<input type="submit" value="Book Now">
+</div>
+</form>
+</div>
+</body>
+</html>
