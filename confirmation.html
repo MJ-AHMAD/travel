@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Booking Confirmation</title>
+<style>
+body {
+font-family: Arial, sans-serif;
+background-color: #f0f0f0;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+margin: 0;
+}
+
+.confirmation-form {
+background-color: #fff;
+padding: 20px;
+border-radius: 8px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+width: 300px;
+}
+
+.confirmation-form h1 {
+margin-bottom: 20px;
+font-size: 24px;
+text-align: center;
+}
+
+.confirmation-form p {
+margin-bottom: 10px;
+}
+
+.confirmation-form button {
+width: 100%;
+padding: 10px;
+background-color: #007bff;
+color: #fff;
+border: none;
+border-radius: 4px;
+cursor: pointer;
+}
+
+.confirmation-form button:hover {
+background-color: #0056b3;
+}
+</style>
+<script>
+function populateBookingData() {
+const bookingData = JSON.parse(localStorage.getItem('bookingData'));
+if (bookingData) {
+document.getElementById('first-name').innerText = bookingData['first-name'];
+document.getElementById('last-name').innerText = bookingData['last-name'];
+document.getElementById('email').innerText = bookingData['email'];
+document.getElementById('phone').innerText = bookingData['phone'];
+document.getElementById('passport').innerText = bookingData['passport'];
+document.getElementById('from').innerText = bookingData['from'];
+document.getElementById('to').innerText = bookingData['to'];
+document.getElementById('departure-date').innerText = bookingData['departure-date'];
+document.getElementById('return-date').innerText = bookingData['return-date'];
+document.getElementById('passengers').innerText = bookingData['passengers'];
+}
+}
+
+function handleSubmit() {
+const bookingData = JSON.parse(localStorage.getItem('bookingData'));
+if (bookingData) {
+// Send booking data to server or email
+// Example: sendEmail(bookingData);
+
+// Send confirmation email to user
+// Example: sendConfirmationEmail(bookingData['email']);
+
+alert('Booking confirmed and email sent!');
+}
+}
+
+window.onload = populateBookingData;
+</script>
+</head>
+<body>
+<div class="confirmation-form">
+<h1>Booking Confirmation</h1>
+<p><strong>First Name:</strong> <span id="first-name"></span></p>
+<p><strong>Last Name:</strong> <span id="last-name"></span></p>
+<p><strong>Email:</strong> <span id="email"></span></p>
+<p><strong>Phone Number:</strong> <span id="phone"></span></p>
+<p><strong>Passport Number:</strong> <span id="passport"></span></p>
+<p><strong>From:</strong> <span id="from"></span></p>
+<p><strong>To:</strong> <span id="to"></span></p>
+<p><strong>Departure Date:</strong> <span id="departure-date"></span></p>
+<p><strong>Return Date:</strong> <span id="return-date"></span></p>
+<p><strong>Passengers:</strong> <span id="passengers"></span></p>
+<button onclick="handleSubmit()">Submit</button>
+</div>
+</body>
+</html>
