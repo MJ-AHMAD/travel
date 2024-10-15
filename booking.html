@@ -1,4 +1,91 @@
-<button onclick="continueToPayment()">Continue</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .flight-details, .passenger-details {
+            margin-bottom: 20px;
+        }
+        .flight-details p, .passenger-details p {
+            margin: 5px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Booking Details</h2>
+        <div class="flight-details" id="flightDetails"></div>
+        <h3>Add Passenger</h3>
+        <div class="passenger-details">
+            <div class="form-group">
+                <label for="title">Title</label>
+                <select id="title">
+                    <option value="Mr">Mr</option>
+                    <option value="Miss">Miss</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="firstName">First Name</label>
+                <input type="text" id="firstName" required>
+            </div>
+            <div class="form-group">
+                <label for="lastName">Last Name</label>
+                <input type="text" id="lastName" required>
+            </div>
+            <div class="form-group">
+                <label for="mobileNo">Mobile No</label>
+                <input type="text" id="mobileNo" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" required>
+            </div>
+        </div>
+        <button onclick="continueToPayment()">Continue</button>
+
 
 <script>
     // Function to continue to payment page
@@ -23,3 +110,5 @@
         window.location.href = url.toString();
     }
 </script>
+</body>
+</html>
