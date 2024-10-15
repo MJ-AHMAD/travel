@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            display: block;
+            width: 100%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Payment Details</h2>
+        <div class="details" id="flightDetails"></div>
+        <div class="details" id="passengerDetails"></div>
+        <button onclick="continueToCheckout()">Continue</button>
+    </div>
+
+    <script>
+        // Get flight and passenger details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const airlineCode = urlParams.get('airlineCode');
+        const airlineFullName = urlParams.get('airlineFullName');
+        const priceBDT = urlParams.get('priceBDT');
+        const departureTime = urlParams.get('departureTime');
+        const arrivalTime = urlParams.get('arrivalTime');
+        const title = urlParams.get('title');
+        const firstName = urlParams.get('firstName');
+        const lastName = urlParams.get('lastName');
+        const mobileNo = urlParams.get('mobileNo');
+        const email = urlParams.get('email');
+
+        // Display flight details
+        const flightDetailsDiv = document.getElementById('flightDetails');
+        flightDetailsDiv.innerHTML = `
+            <h3>Flight Details</h3>
+            <p><strong>Airline:</strong> ${airlineCode} (${airlineFullName})</p>
+            <p><strong>Price:</strong> BDT ${priceBDT}</p>
+            <p><strong>Departure Time:</strong> ${departureTime}</p>
+            <p><strong>Arrival Time:</strong> ${arrivalTime}</p>
+        `;
+
+        // Display passenger details
+        const passengerDetailsDiv = document.getElementById('passengerDetails');
+        passengerDetailsDiv.innerHTML = `
+            <h3>Passenger Details</h3>
+            <p><strong>Title:</strong> ${title}</p>
+            <p><strong>First Name:</strong> ${firstName}</p>
+            <p><strong>Last Name:</strong> ${lastName}</p>
+            <p><strong>Mobile No:</strong> ${mobileNo}</p>
+            <p><strong>Email:</strong> ${email}</p>
+        `;
+
+        // Function to continue to checkout page
+        function continueToCheckout() {
+            const url = new URL('checkout.html', window.location.href);
+            url.searchParams.append('airlineCode', airlineCode);
+            url.searchParams.append('airlineFullName', airlineFullName);
+            url.searchParams.append('priceBDT', priceBDT);
+            url.searchParams.append('departureTime', departureTime);
+            url.searchParams.append('arrivalTime', arrivalTime);
+            url.searchParams.append('title', title);
+            url.searchParams.append('firstName', firstName);
+            url.searchParams.append('lastName', lastName);
+            url.searchParams.append('mobileNo', mobileNo);
+            url.searchParams.append('email', email);
+            window.location.href = url.toString();
+        }
+    </script>
+</body>
+</html>
