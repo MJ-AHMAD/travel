@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .details {
+            margin-bottom: 20px;
+        }
+        .details p {
+            margin: 5px 0;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .payment-methods {
+            margin-bottom: 20px;
+        }
+        .payment-methods div {
+            display: none;
+            margin-top: 10px;
+        }
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+            width: 48%;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Checkout</h2>
+        <div class="details" id="flightDetails"></div>
+        <div class="details" id="passengerDetails"></div>
+        <h3>Select a payment method</h3>
+        <div class="form-group">
+            <label for="paymentMethod">Payment Method</label>
+            <select id="paymentMethod" onchange="showPaymentOptions()">
+                <option value="">Select a payment method</option>
+                <option value="card">Card Payment</option>
+                <option value="mobile">Mobile Banking</option>
+                <option value="internet">Internet Banking</option>
+            </select>
+        </div>
+        <div class="payment-methods" id="paymentOptions">
+            <div id="cardOptions">
+                <label for="cardType">Card Type</label>
+                <select id="cardType">
+                    <option value="visa">Visa</option>
+                    <option value="mastercard">MasterCard</option>
+                    <option value="amex">American Express</option>
+                </select>
+            </div>
+            <div id="mobileOptions">
+                <label for="mobileType">Mobile Banking</label>
+                <select id="mobileType">
+                    <option value="bkash">bKash</option>
+                    <option value="nagad">Nagad</option>
+                    <option value="rocket">Rocket</option>
+                </select>
+            </div>
+            <div id="internetOptions">
+                <label for="internetType">Internet Banking</label>
+                <select id="internetType">
+                    <option value="dbbl">Dutch-Bangla Bank</option>
+                    <option value="brac">BRAC Bank</option>
+                    <option value="city">City Bank</option>
+                </select>
+            </div>
+        </div>
+        <div class="buttons">
+            <button onclick="bookNow()">Book Now</button>
+            <button onclick="payFirst()">Pay First</button>
+        </div>
+    </div>
+
+    <script>
+        // Get flight and passenger details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const airlineCode = urlParams.get('airlineCode');
+        const airlineFullName = urlParams.get('airlineFullName');
+        const priceBDT = urlParams.get('priceBDT');
+        const departureTime = urlParams.get('departureTime');
+        const arrivalTime = urlParams.get('arrivalTime');
+        const title = urlParams.get('title');
+        const firstName = urlParams.get('firstName');
+        const lastName = urlParams.get('lastName');
+        const mobileNo = urlParams.get('mobileNo');
+        const email = urlParams.get('email');
+
+        // Display flight details
+        const flightDetailsDiv = document.getElementById('flightDetails');
+        flightDetailsDiv.innerHTML = `
+            <h3>Flight Details</h3>
+            <p><strong>Airline:</strong> ${airlineCode} (${airlineFullName})</p>
+            <p><strong>Price:</strong> BDT ${priceBDT}</p>
+            <p><strong>Departure Time:</strong> ${departureTime}</p>
+            <p><strong>Arrival Time:</strong> ${arrivalTime}</p>
+        `;
+
+        // Display passenger details
+        const passengerDetailsDiv = document.getElementById('passengerDetails');
+        passengerDetailsDiv.innerHTML = `
+            <h3>Passenger Details</h3>
+            <p><strong>Title:</strong> ${title}</p>
+            <p><strong>First Name:</strong> ${firstName}</p>
+            <p><strong>Last Name:</strong> ${lastName}</p>
+            <p><strong>Mobile No:</strong> ${mobileNo}</p>
+            <p><strong>Email:</strong> ${email}</p>
+        `;
+
+        // Show payment options based on selected method
+        function showPaymentOptions() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            document.getElementById('cardOptions').style.display = 'none';
+            document.getElementById('mobileOptions').style.display = 'none';
+            document.getElementById('internetOptions').style.display = 'none';
+
+            if (paymentMethod === 'card') {
+                document.getElementById('cardOptions').style.display = 'block';
+            } else if (paymentMethod === 'mobile') {
+                document.getElementById('mobileOptions').style.display = 'block';
+            } else if (paymentMethod === 'internet') {
+                document.getElementById('internetOptions').style.display = 'block';
+            }
+        }
+
+        // Function to handle "Book Now" button click
+        function bookNow() {
+            alert('Booking confirmed!');
+            // Redirect to a confirmation page or perform further actions
+        }
+
+        // Function to handle "Pay First" button click
+        function payFirst() {
+            alert('Proceeding to payment!');
+            // Redirect to a payment gateway or perform further actions
+        }
+    </script>
+</body>
+</html>
