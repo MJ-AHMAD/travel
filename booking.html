@@ -1,114 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            background-color: #f4f4f9;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        .flight-details, .passenger-details {
-            margin-bottom: 20px;
-        }
-        .flight-details p, .passenger-details p {
-            margin: 5px 0;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-        }
-        input, select {
-            width: 100%;
-            padding: 8px;
-            box-sizing: border-box;
-        }
-        button {
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            padding: 10px 15px;
-            cursor: pointer;
-            border-radius: 5px;
-            display: block;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-    </style>
-</head>
-<body>
-    <div class="container">
-        <h2>Booking Details</h2>
-        <div class="flight-details" id="flightDetails"></div>
-        <h3>Add Passenger</h3>
-        <div class="passenger-details">
-            <div class="form-group">
-                <label for="title">Title</label>
-                <select id="title">
-                    <option value="Mr">Mr</option>
-                    <option value="Miss">Miss</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="firstName">First Name</label>
-                <input type="text" id="firstName" required>
-            </div>
-            <div class="form-group">
-                <label for="lastName">Last Name</label>
-                <input type="text" id="lastName" required>
-            </div>
-            <div class="form-group">
-                <label for="mobileNo">Mobile No</label>
-                <input type="text" id="mobileNo" required>
-            </div>
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" id="email" required>
-            </div>
-        </div>
-        <button onclick="continueToPayment()">Continue</button>
-    </div>
+<button onclick="continueToPayment()">Continue</button>
 
-    <script>
-        // Get flight details from URL parameters
-        const urlParams = new URLSearchParams(window.location.search);
-        const airlineCode = urlParams.get('airlineCode');
-        const airlineFullName = urlParams.get('airlineFullName');
-        const priceBDT = urlParams.get('priceBDT');
-        const departureTime = urlParams.get('departureTime');
-        const arrivalTime = urlParams.get('arrivalTime');
+<script>
+    // Function to continue to payment page
+    function continueToPayment() {
+        const title = document.getElementById('title').value;
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const mobileNo = document.getElementById('mobileNo').value;
+        const email = document.getElementById('email').value;
 
-        // Display flight details
-        const flightDetailsDiv = document.getElementById('flightDetails');
-        flightDetailsDiv.innerHTML = `
-            <p><strong>Airline:</strong> ${airlineCode} (${airlineFullName})</p>
-            <p><strong>Price:</strong> BDT ${priceBDT}</p>
-            <p><strong>Departure Time:</strong> ${departureTime}</p>
-            <p><strong>Arrival Time:</strong> ${arrivalTime}</p>
-        `;
-
-        // Function to continue to payment page
-        function continueToPayment() {
-            window.location.href = 'payment.html';
-        }
-    </script>
-</body>
-</html>
+        const url = new URL('payment.html', window.location.href);
+        url.searchParams.append('airlineCode', airlineCode);
+        url.searchParams.append('airlineFullName', airlineFullName);
+        url.searchParams.append('priceBDT', priceBDT);
+        url.searchParams.append('departureTime', departureTime);
+        url.searchParams.append('arrivalTime', arrivalTime);
+        url.searchParams.append('title', title);
+        url.searchParams.append('firstName', firstName);
+        url.searchParams.append('lastName', lastName);
+        url.searchParams.append('mobileNo', mobileNo);
+        url.searchParams.append('email', email);
+        window.location.href = url.toString();
+    }
+</script>
