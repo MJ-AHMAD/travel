@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Search</title>
+</head>
+<body>
+    <div id="flightDiv"></div>
+    <script>
+        // Example flight data
+        const airlineCode = "XYZ";
+        const airlineFullName = "Example Airline";
+        const priceBDT = 5000;
+        const departureTime = "10:00 AM";
+        const arrivalTime = "12:00 PM";
+
+        const flightDiv = document.getElementById('flightDiv');
+        flightDiv.innerHTML = `
+            <p><strong>Airline:</strong> ${airlineCode} (${airlineFullName})</p>
+            <p><strong>Price:</strong> BDT ${priceBDT}</p>
+            <p><strong>Departure Time:</strong> ${departureTime}</p>
+            <p><strong>Arrival Time:</strong> ${arrivalTime}</p>
+            <button onclick="bookFlight('${airlineCode}', '${airlineFullName}', ${priceBDT}, '${departureTime}', '${arrivalTime}')">Book Now</button>
+        `;
+
+        function bookFlight(airlineCode, airlineFullName, priceBDT, departureTime, arrivalTime) {
+            const url = new URL('https://mj-ahmad.github.io/travel/b4.html');
+            url.searchParams.append('airlineCode', airlineCode);
+            url.searchParams.append('airlineFullName', airlineFullName);
+            url.searchParams.append('priceBDT', priceBDT);
+            url.searchParams.append('departureTime', departureTime);
+            url.searchParams.append('arrivalTime', arrivalTime);
+            window.location.href = url.toString();
+        }
+    </script>
+</body>
+</html>
