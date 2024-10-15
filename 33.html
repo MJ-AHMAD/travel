@@ -1,1 +1,77 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Flight Search</title><style>body {font-family: Arial, sans-serif;margin: 20px;}.flight {border: 1px solid #ccc;padding: 10px;margin-bottom: 10px;}#priceDisplay {margin-top: 20px;padding: 10px;border: 1px solid #ccc;background-color: #f9f9f9;}</style></head><body><h2>Flight Search Results</h2><div id="flightResults"></div><div id="priceDisplay"><strong>Selected Price:</strong> <span id="selectedPrice">None</span></div><script>// Sample flight dataconst flights = [{ airlineCode: 'BG', airlineFullName: 'Biman Bangladesh Airlines', priceBDT: 5000, departureTime: '10:00 AM', arrivalTime: '12:00 PM' },{ airlineCode: 'US', airlineFullName: 'US-Bangla Airlines', priceBDT: 4500, departureTime: '11:00 AM', arrivalTime: '1:00 PM' },{ airlineCode: 'NOV', airlineFullName: 'Novoair', priceBDT: 4800, departureTime: '12:00 PM', arrivalTime: '2:00 PM' }];const flightResults = document.getElementById('flightResults');const selectedPrice = document.getElementById('selectedPrice');flights.forEach(flight => {const flightDiv = document.createElement('div');flightDiv.className = 'flight';flightDiv.innerHTML = `<p><strong>Airline:</strong> ${flight.airlineCode} (${flight.airlineFullName})</p><p><strong>Price:</strong> BDT ${flight.priceBDT}</p><p><strong>Departure Time:</strong> ${flight.departureTime}</p><p><strong>Arrival Time:</strong> ${flight.arrivalTime}</p><button onclick="showPrice(${flight.priceBDT})">Book Now</button>`;flightResults.appendChild(flightDiv);});function showPrice(price) {selectedPrice.textContent = `BDT ${price}`;}</script></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .flight {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .flight p {
+            margin: 5px 0;
+        }
+        .flight button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .flight button:hover {
+            background-color: #0056b3;
+        }
+        #priceDisplay {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            background-color: #e9ecef;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Flight Search Results</h2>
+    <div id="flightResults"></div>
+    <div id="priceDisplay"><strong>Selected Price:</strong> <span id="selectedPrice">None</span></div>
+
+    <script>
+        // Sample flight data
+        const flights = [
+            { airlineCode: 'BG', airlineFullName: 'Biman Bangladesh Airlines', priceBDT: 5000, departureTime: '10:00 AM', arrivalTime: '12:00 PM' },
+            { airlineCode: 'US', airlineFullName: 'US-Bangla Airlines', priceBDT: 4500, departureTime: '11:00 AM', arrivalTime: '1:00 PM' },
+            { airlineCode: 'NOV', airlineFullName: 'Novoair', priceBDT: 4800, departureTime: '12:00 PM', arrivalTime: '2:00 PM' }
+        ];
+
+        const flightResults = document.getElementById('flightResults');
+        const selectedPrice = document.getElementById('selectedPrice');
+
+        flights.forEach(flight => {
+            const flightDiv = document.createElement('div');
+            flightDiv.className = 'flight';
+            flightDiv.innerHTML = `
+                <p><strong>Airline:</strong> ${flight.airlineCode} (${flight.airlineFullName})</p>
+                <p><strong>Price:</strong> BDT ${flight.priceBDT}</p>
+                <p><strong>Departure Time:</strong> ${flight.departureTime}</p>
+                <p><strong>Arrival Time:</strong> ${flight.arrivalTime}</p>
+                <button onclick="showPrice(${flight.priceBDT})">Book Now</button>
+            `;
+            flightResults.appendChild(flightDiv);
+        });
+
+        function showPrice(price) {
+            selectedPrice.textContent = `BDT ${price}`;
+        }
+    </script>
+</body>
+</html>
