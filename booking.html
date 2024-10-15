@@ -85,6 +85,31 @@
             </div>
         </div>
         <button onclick="continueToPayment()">Continue</button>
+    </div>
+
+    <script>
+        // Get flight details from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const airlineCode = urlParams.get('airlineCode');
+        const airlineFullName = urlParams.get('airlineFullName');
+        const priceBDT = urlParams.get('priceBDT');
+        const departureTime = urlParams.get('departureTime');
+        const arrivalTime = urlParams.get('arrivalTime');
+
+        // Display flight details
+        const flightDetailsDiv = document.getElementById('flightDetails');
+        flightDetailsDiv.innerHTML = `
+            <p><strong>Airline:</strong> ${airlineCode} (${airlineFullName})</p>
+            <p><strong>Price:</strong> BDT ${priceBDT}</p>
+            <p><strong>Departure Time:</strong> ${departureTime}</p>
+            <p><strong>Arrival Time:</strong> ${arrivalTime}</p>
+        `;
+
+        // Function to continue to payment page
+        function continueToPayment() {
+            window.location.href = 'payment.html';
+        }
+    </script>
 
 
 <script>
