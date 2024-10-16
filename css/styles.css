@@ -51,31 +51,30 @@ header {
     display: block;
 }
 
-.flight-form {
+.flight- form {
     margin-top: 20px;
     text-align: center;
 }
 
-.flight-form table {
+.flight- form table {
     width: 100%;
     border-collapse: collapse;
     margin: 0 auto;
 }
 
-.flight-form th, .flight-form td {
+.flight- form th, .flight- form td {
     padding: 10px;
     text-align: center;
 }
 
-.flight-form select, .flight-form input {
+.flight- form select, .flight- form input {
     width: 100%;
     padding: 8px;
     margin: 5px 0;
     box-sizing: border-box;
 }
 
-.flight-form 
-.buttons {
+.flight-form buttons {
     display: flex;
     justify-content: space-between;
 }
@@ -114,7 +113,7 @@ button:hover {
 }
 
 @media (max-width: 600px) {
-    .flight-form table, .flight-form th, .flight-form td {
+    .flight- form table, .flight-form th, .flight-form td {
         display: block;
         width: 100%;
     }
