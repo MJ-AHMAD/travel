@@ -74,20 +74,24 @@ header {
     box-sizing: border-box;
 }
 
-.flight-form button {
-    width: 100%;
-    padding: 15px;
+.flight-form 
+.buttons {
+    display: flex;
+    justify-content: space-between;
+}
+button {
     background-color: #007bff;
     color: #fff;
     border: none;
+    padding: 10px 15px;
     cursor: pointer;
-    font-size: 1.2em;
     border-radius: 5px;
+    width: 48%;
 }
-
-.flight-form button:hover {
+button:hover {
     background-color: #0056b3;
 }
+
 
 .number-input {
     display: flex;
