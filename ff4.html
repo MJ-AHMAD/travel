@@ -106,11 +106,12 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             <label for="paymentMethod">Payment Method</label>
    <div class="form-group">
         <div class="buttons">
-            <button onclick="bookNow()">
-    <option value="">Select a payment method</option>
+            <select id="book Now" onchange="showPaymentOptions()">
+    <option value="">Select</option>
                 <option value="card">Card Payment</option>
                 <option value="mobile">Mobile Banking</option>
 </button>
+</select>
             <button onclick="payFirst()">Pay First</button>
         </div>
 </div>
