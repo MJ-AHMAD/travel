@@ -40,12 +40,9 @@
             box-sizing: border-box;
         }
         .payment-methods {
-            margin-bottom: 20px;
+            margin-bottom: 15px;
         }
-        .payment-methods div {
-            display: none;
-            margin-top: 10px;
-        }
+        
         .buttons {
             display: flex;
             justify-content: space-between;
@@ -68,51 +65,26 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
       
         
         <div class="form-group">
-            <label for="paymentMethod">Payment Method</label>
-            <select id="paymentMethod" onchange="showPaymentOptions()">
-                <option value="">Select a payment method</option>
-                <option value="card">Card Payment</option>
-                <option value="mobile">Mobile Banking</option>
-                <option value="internet">Internet Banking</option>
-            </select>
-        </div>
-        <div class="payment-methods" id="paymentOptions">
-            <div id="cardOptions">
-                <label for="cardType">Card Type</label>
-                <select id="cardType">
-                    <option value="visa">Visa</option>
-                    <option value="mastercard">MasterCard</option>
-                    <option value="amex">American Express</option>
-                </select>
-            </div>
-            <div id="mobileOptions">
-                <label for="mobileType">Mobile Banking</label>
-                <select id="mobileType">
-                    <option value="bkash">bKash</option>
-                    <option value="nagad">Nagad</option>
-                    <option value="rocket">Rocket</option>
-                </select>
-            </div>
-            <div id="internetOptions">
-                <label for="internetType">Internet Banking</label>
-                <select id="internetType">
-                    <option value="dbbl">Dutch-Bangla Bank</option>
-                    <option value="brac">BRAC Bank</option>
-                    <option value="city">City Bank</option>
-                </select>
-            </div>
-        </div>
-</div>
-            <label for="paymentMethod">Payment Method</label>
+         
+            <label for="bookingMethod">Payment Method</label>
    <div class="form-group">
         <div class="buttons">
-            <select id="book Now" onchange="showPaymentOptions()">
+            <select id="book Now" onchange="showBook()">
     <option value="">Select</option>
                 <option value="card">Card Payment</option>
                 <option value="mobile">Mobile Banking</option>
 </button>
 </select>
-            <button onclick="payFirst()">Pay First</button>
+
+  <label for="bookingMethod">Payment Method</label>
+   <div class="form-group">
+        <div class="buttons">
+            <select id="book Now" onchange="showBook()">
+    <option value="">Select</option>
+                <option value="card">Card Payment</option>
+                <option value="mobile">Mobile Banking</option>
+</button>
+</select>
         </div>
 </div>
    <div class="form-group">
@@ -130,8 +102,8 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     <script>
         
         // Show payment options based on selected method
-        function showPaymentOptions() {
-            const paymentMethod = document.getElementById('paymentMethod').value;
+        function showBookOptions() {
+            const Booking= document.getElementById('bookingMethod').value;
             document.getElementById('cardOptions').style.display = 'none';
             document.getElementById('mobileOptions').style.display = 'none';
             document.getElementById('internetOptions').style.display = 'none';
@@ -145,15 +117,8 @@ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             }
         }
 
-        // Function to handle "Book Now" button click
-        function bookNow() {
-            alert('Booking confirmed!');
-            // Redirect to a confirmation page or perform further actions
-        }
-
-        // Function to handle "Pay First" button click
-        function payFirst() {
-            alert('Proceeding to payment!');
+        
+        
             // Redirect to a payment gateway or perform further actions
         }
     </script>
