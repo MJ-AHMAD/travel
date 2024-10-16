@@ -84,7 +84,8 @@
                 <input type="email" id="email" required>
             </div>
         </div>
-        <button onclick="continueToPayment()">Continue</button>
+
+<button onclick="continueToPayment()">Continue</button>
     </div>
 
     <script>
@@ -105,13 +106,31 @@
             <p><strong>Arrival Time:</strong> ${arrivalTime}</p>
         `;
 
-        // Function to continue to payment page
-        function continueToPayment() {
-            window.location.href = 'payment.html';
-        }
-    </script>
+    // Function to continue to payment page
+    function continueToPayment() {
+        const title = document.getElementById('title').value;
+        const firstName = document.getElementById('firstName').value;
+        const lastName = document.getElementById('lastName').value;
+        const mobileNo = document.getElementById('mobileNo').value;
+        const email = document.getElementById('email').value;
 
+        const url = new URL('payment.html', window.location.href);
+        url.searchParams.append('airlineCode', airlineCode);
+        url.searchParams.append('airlineFullName', airlineFullName);
+        url.searchParams.append('priceBDT', priceBDT);
+        url.searchParams.append('departureTime', departureTime);
+        url.searchParams.append('arrivalTime', arrivalTime);
+        url.searchParams.append('title', title);
+        url.searchParams.append('firstName', firstName);
+        url.searchParams.append('lastName', lastName);
+        url.searchParams.append('mobileNo', mobileNo);
+        url.searchParams.append('email', email);
+        window.location.href = url.toString();
+    }
+</script>
 
 
 </body>
 </html>
+
+
