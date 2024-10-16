@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+            padding-bottom: 100px; /* To ensure content doesn't go under the fixed button */
+        }
+        header {
+            background-color: #000;
+            color: #fff;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        .logo {
+            font-size: 1.5em;
+            font-weight: bold;
+        }
+        .menu-icon {
+            font-size: 1.5em;
+            cursor: pointer;
+            position: relative;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 20px;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #f1f1f1;
+        }
+        .menu-icon:hover .dropdown-content {
+            display: block;
+        }
+        .flight {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .flight p {
+            margin: 5px 0;
+        }
+        .flight button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .flight button:hover {
+            background-color: #0056b3;
+        }
+        #priceDisplay {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            border-top: 1px solid #ccc;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        #priceDisplay div {
+            flex: 1;
+        }
+        #priceDisplay button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #priceDisplay button:hover {
+            background-color: #218838;
+        }
+        .flight-info {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+            font-size: 1.2em;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">Logo</div>
+        <div class="menu-icon">☰
+            <div class="dropdown-content">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+                <a href="#about">About</a>
+            </div>
+        </div>
+    </header>
+    <h2>Flight Search Results</h2>
+    <div id="flightResults"></div>
+    <div class="flight-info">
+        <div>DAC - COX</div>
+        <div>16-Oct-2024</div>
+    </div>
+    <div id="priceDisplay">
+        <div><strong>Selected Price:</strong> <span id="selectedPrice">None</span></div>
+        <button id="continueButton" onclick="continueBooking()" disabled>Continue</button>
+    </div>
+
+    <script>
+        // Sample flight data
+        const flights = [
+            { airlineCode: 'BG', airlineFullName: 'Biman Bangladesh Airlines', priceBDT: 5000, departureTime: '10:00 AM', arrivalTime: '12:00 PM' },
+            { airlineCode: 'US', airlineFullName: 'US-Bangla Airlines', priceBDT: 4500, departureTime: '11:00 AM', arrivalTime: '1:00 PM' },
+            { airlineCode: 'NOV', airlineFullName: 'Novoair', priceBDT: 4800, departureTime: '12:00 PM', arrivalTime: '2:00 PM' },
+            { airlineCode: 'BG', airlineFullName: 'Biman Bangladesh Airlines', priceBDT: 5200, departureTime: '1:00 PM', arrivalTime: '3:00 PM' },
+            { airlineCode: 'US', airlineFullName: 'US-Bangla Airlines', priceBDT: 4700, departureTime: '2:00 PM', arrivalTime: '4:00 PM' },
+            { airlineCode: 'NOV', airlineFullName: 'Novoair', priceBDT: 4900, departureTime: '3:00 PM', arrivalTime: '5:00 PM' },
+            { airlineCode: 'BG', airlineFullName: 'Biman Bangladesh Airlines', priceBDT: 5300, departureTime: '4:00 PM', arrivalTime: '6:00 PM' },
+            { airlineCode: 'US', airlineFullName: 'US-Bangla Airlines', priceBDT: 4600, departureTime: '5:00 PM', arrivalTime: '7:00 PM' },
+            { airlineCode: 'NOV', airlineFullName: 'Novoair', priceBDT: 4950, departureTime: '6:00 PM', arrivalTime: '8:00 PM' }
+        ];
+
+        const flightResults = document.getElementById('flightResults');
+        const selectedPrice = document.getElementById('selectedPrice');
+        const continueButton = document.getElementById('continueButton');
+
+        function updateFlightResults() {
+            const now = new Date();
+            flightResults.innerHTML = ''; // Clear previous results
+
+            flights.forEach(flight => {
+                const departureTime = new Date();
+                const [hours, minutes] = flight.departureTime.split(' ')[0].split(':');
+                departureTime.setHours(hours);
+                departureTime.setMinutes(minutes);
+
+                // Check if the flight departs in more than 30 minutes
+                if ((departureTime - now) > 30 * 60 * 1000) {
+                    const flightDiv = document.createElement('div');
+                    flightDiv.className = 'flight';
+                    flightDiv.innerHTML = `
+                        <p><strong>Airline:</strong> ${flight.airlineCode} (${flight.airlineFullName})</p>
+                        <p><strong>Price:</strong> BDT ${flight.priceBDT}</p>
+                        <p><strong>Departure Time:</strong> ${flight.departureTime}</p>
+                        <p><strong>Arrival Time:</strong> ${flight.arrivalTime}</p>
+                        <button onclick="showPrice(${flight.priceBDT}, '${flight.airlineCode}', '${flight.airlineFullName}', '${flight.departureTime}', '${flight.arrivalTime}')">Book Now</button>
+                    `;
+                    flightResults.appendChild(flightDiv);
+                }
+            });
+        }
+
+        function showPrice(price, airlineCode, airlineFullName, departureTime, arrivalTime) {
+            selectedPrice.textContent = `BDT ${price}`;
+            continueButton.disabled = false;
+            continueButton.onclick = function() {
+                continueBooking(price, airlineCode, airlineFullName, departureTime, arrivalTime);
+            };
+        }
+
+        function continueBooking(price, airlineCode, airlineFullName, departureTime, arrivalTime) {
+            const url = new URL('booking.html', window.location.href);
+            url.searchParams.append('priceBDT', price);
+            url.searchParams.append('airlineCode', airlineCode);
+            url.searchParams.append('airlineFullName', airlineFullName);
+            url.searchParams.append('departureTime', departureTime);
+            url.searchParams.append('arrivalTime', arrivalTime);
+            window.location.href = url.toString();
+        }
+
+        // Update flight results initially and every minute
+        updateFlightResults();
+        setInterval(updateFlightResults, 60 * 1000);
+    </script>
+</body>
+</html>
