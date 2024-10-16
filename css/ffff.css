@@ -2,7 +2,8 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
     background-color: #f4f4f9;
-    padding-bottom: 100px; /* To ensure content doesn't go under the fixed button */
+    padding-bottom: 100px; 
+/* To ensure content doesn't go under the fixed button */
 }
 
 header {
@@ -71,14 +72,14 @@ header {
 }
 
 .flight-form select, .flight-form input {
-    width: 100%;
+    width: 48%;
     padding: 8px;
     margin: 5px 0;
     box-sizing: border-box;
 }
 
 .flight-form button {
-    width: 100%;
+    width: 48%;
     padding: 15px;
     background-color: #007bff;
     color: #fff;
@@ -117,7 +118,7 @@ header {
         flex-direction: column;
     }
     .form-group {
-        width: 100%;
+        width: 48%;
         margin-bottom: 10px;
     }
 }
