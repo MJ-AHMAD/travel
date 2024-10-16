@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Search</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f9;
+        }
+        .flight {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin-bottom: 15px;
+            background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .flight p {
+            margin: 5px 0;
+        }
+        .flight button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        .flight button:hover {
+            background-color: #0056b3;
+        }
+        #priceDisplay {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 15px;
+            border-top: 1px solid #ccc;
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+        }
+        #priceDisplay div {
+            flex: 1;
+        }
+        #priceDisplay button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+        #priceDisplay button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+    <h2>Flight Search Results</h2>
+    <div id="flightResults"></div>
+    <div id="priceDisplay">
+        <div><strong>Selected Price:</strong> <span id="selectedPrice">None</span></div>
+        <button id="continueButton" onclick="continueBooking()" disabled>Continue</button>
+    </div>
+
+    <script>
+        // Sample flight data
+        const flights = [
+            { airlineCode: 'BG', airlineFullName: 'Biman Bangladesh Airlines', priceBDT: 5000, departureTime: '10:00 AM', arrivalTime: '12:00 PM' },
+            { airlineCode: 'US', airlineFullName: 'US-Bangla Airlines', priceBDT: 4500, departureTime: '11:00 AM', arrivalTime: '1:00 PM' },
+            { airlineCode: 'NOV', airlineFullName: 'Novoair', priceBDT: 4800, departureTime: '12:00 PM', arrivalTime: '2:00 PM' },
+            { airlineCode: 'BG', airlineFullName: 'Biman Bangladesh Airlines', priceBDT: 5200, departureTime: '1:00 PM', arrivalTime: '3:00 PM' },
+            { airlineCode: 'US', airlineFullName: 'US-Bangla Airlines', priceBDT: 4700, departureTime: '2:00 PM', arrivalTime: '4:00 PM' },
+            { airlineCode: 'NOV', airlineFullName: 'Novoair', priceBDT: 4900, departureTime: '3:00 PM', arrivalTime: '5:00 PM' }
+        ];
+
+        const flightResults = document.getElementById('flightResults');
+        const selectedPrice = document.getElementById('selectedPrice');
+        const continueButton = document.getElementById('continueButton');
+
+        flights.forEach(flight => {
+            const flightDiv = document.createElement('div');
+            flightDiv.className = 'flight';
+            flightDiv.innerHTML = `
+                <p><strong>Airline:</strong> ${flight.airlineCode} (${flight.airlineFullName})</p>
+                <p><strong>Price:</strong> BDT ${flight.priceBDT}</p>
+                <p><strong>Departure Time:</strong> ${flight.departureTime}</p>
+                <p><strong>Arrival Time:</strong> ${flight.arrivalTime}</p>
+                <button onclick="showPrice(${flight.priceBDT}, '${flight.airlineCode}', '${flight.airlineFullName}', '${flight.departureTime}', '${flight.arrivalTime}')">Book Now</button>
+            `;
+            flightResults.appendChild(flightDiv);
+        });
+
+        function showPrice(price, airlineCode, airlineFullName, departureTime, arrivalTime) {
+            selectedPrice.textContent = `BDT ${price}`;
+            continueButton.disabled = false;
+            continueButton.onclick = function() {
+                continueBooking(price, airlineCode, airlineFullName, departureTime, arrivalTime);
+            };
+        }
+
+        function continueBooking(price, airlineCode, airlineFullName, departureTime, arrivalTime) {
+            const url = new URL('booking.html', window.location.href);
+            url.searchParams.append('priceBDT', price);
+            url.searchParams.append('airlineCode', airlineCode);
+            url.searchParams.append('airlineFullName', airlineFullName);
+            url.searchParams.append('departureTime', departureTime);
+            url.searchParams.append('arrivalTime', arrivalTime);
+            window.location.href = url.toString();
+        }
+    </script>
+</body>
+</html>
