@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flight Search</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <header>
+        <div class="logo">T-ALLY</div>
+        <div class="menu-icon">☰
+            <div class="dropdown-content">
+                <a href="#home">Home</a>
+                <a href="#services">Services</a>
+                <a href="#contact">Contact</a>
+                <a href="#about">About</a>
+            </div>
+        </div>
+    </header>
+    <h2>Flight</h2>
+    <div class="flight-form">
+        <table>
+            <tr>
+                <td>
+                    <label for="journey">Journey</label>
+                    <select id="journey">
+                        <option value="one-way">One way</option>
+                        <option value="return">Return</option>
+                    </select>
+                </td>
+                <td>
+                    <label for="class">Class</label>
+                    <select id="class">
+                        <option value="economy">Economy</option>
+                        <option value="business">Business</option>
+                        <option value="premium">Premium</option>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="flying-from">Flying from</label>
+                    <input type="text" id="flying-from" placeholder="Enter departure city">
+                </td>
+                <td>
+                    <label for="flying-to">Flying to</label>
+                    <input type="text" id="flying-to" placeholder="Enter destination city">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="departure-date">Departure Date</label>
+                    <input type="date" id="departure-date">
+                </td>
+                <td id="return-date-cell" style="display: none;">
+                    <label for="return-date">Return Date</label>
+                    <input type="date" id="return-date">
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <label for="adults">Adults</label>
+                    <div class="number-input">
+                        <button onclick="changeValue('adults', -1)">-</button>
+                        <input type="number" id="adults" value="1" min="1">
+                        <button onclick="changeValue('adults', 1)">+</button>
+                    </div>
+                </td>
+                <td>
+                    <label for="children">Children</label>
+                    <div class="number-input">
+                        <button onclick="changeValue('children', -1)">-</button>
+                        <input type="number" id="children" value="0" min="0">
+                        <button onclick="changeValue('children', 1)">+</button>
+                    </div>
+                </td>
+                <td>
+                    <label for="infants">Infants</label>
+                    <div class="number-input">
+                        <button onclick="changeValue('infants', -1)">-</button>
+                        <input type="number" id="infants" value="0" min="0">
+                        <button onclick="changeValue('infants', 1)">+</button>
+                    </div>
+                </td>
+            </tr>
+        </table>
+        <button onclick="searchFlights()">SEARCH FLIGHTS</button>
+    </div>
+
+    <script>
+        document.getElementById('journey').addEventListener('change', function() {
+            const returnDateCell = document.getElementById('return-date-cell');
+            if (this.value === 'return') {
+                returnDateCell.style.display = 'table-cell';
+            } else {
+                returnDateCell.style.display = 'none';
+            }
+        });
+
+        function changeValue(id, delta) {
+            const input = document.getElementById(id);
+            const newValue = parseInt(input.value) + delta;
+            if (newValue >= parseInt(input.min)) {
+                input.value = newValue;
+            }
+        }
+
+        function searchFlights() {
+            const journey = document.getElementById('journey').value;
+            const flightClass = document.getElementById('class').value;
+            const flyingFrom = document.getElementById('flying-from').value;
+            const flyingTo = document.getElementById('flying-to').value;
+            const departureDate = document.getElementById('departure-date').value;
+            const returnDate = document.getElementById('return-date').value;
+            const adults = document.getElementById('adults').value;
+            const children = document.getElementById('children').value;
+            const infants = document.getElementById('infants').value;
+
+            const url = new URL('current_page.html', window.location.href);
+            url.searchParams.append('journey', journey);
+            url.searchParams.append('class', flightClass);
+            url.searchParams.append('flyingFrom', flyingFrom);
+            url.searchParams.append('flyingTo', flyingTo);
+            url.searchParams.append('departureDate', departureDate);
+            if (journey === 'return') {
+                url.searchParams.append('returnDate', returnDate);
+            }
+            url.searchParams.append('adults', adults);
+            url.searchParams.append('children', children);
+            url.searchParams.append('infants', infants);
+
+            window.location.href = url.toString();
+        }
+    </script>
+</body>
+</html>
