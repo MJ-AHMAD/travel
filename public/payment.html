@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #007bff;
+        }
+        .details {
+            margin-bottom: 1rem;
+        }
+        .details p {
+            margin: 0.5rem 0;
+        }
+        .details strong {
+            display: inline-block;
+            width: 150px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group {
+            margin-bottom: 1rem;
+        }
+        label {
+            margin-bottom: 0.5rem;
+        }
+        input, button {
+            padding: 0.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+    <script src="payment.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Payment Page</h1>
+        <h2>Flight and Passenger Details</h2>
+        <div class="details">
+            <p><strong>Airline:</strong> <span id="airline"></span></p>
+            <p><strong>Departure:</strong> <span id="departure"></span></p>
+            <p><strong>Arrival:</strong> <span id="arrival"></span></p>
+            <p><strong>Duration:</strong> <span id="duration"></span></p>
+            <p><strong>Stops:</strong> <span id="stops"></span></p>
+            <p><strong>Price:</strong> <span id="price"></span></p>
+            <p><strong>Passenger Name:</strong> <span id="passenger-name"></span></p>
+            <p><strong>Passenger Email:</strong> <span id="passenger-email"></span></p>
+        </div>
+        <h2>Payment Information</h2>
+        <form id="payment-form">
+            <div class="form-group">
+                <label for="card-number">Card Number:</label>
+                <input type="text" id="card-number" name="card-number" required>
+            </div>
+            <div class="form-group">
+                <label for="expiry-date">Expiry Date:</label>
+                <input type="text" id="expiry-date" name="expiry-date" required>
+            </div>
+            <div class="form-group">
+                <label for="cvv">CVV:</label>
+                <input type="text" id="cvv" name="cvv" required>
+            </div>
+            <button type="submit">Confirm Payment</button>
+        </form>
+    </div>
+</body>
+</html>
