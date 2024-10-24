@@ -11,11 +11,43 @@
             margin: 0;
             padding: 0;
         }
-        header {
-            background-color: #007bff;
+        header, footer {
+            background-color: black;
             color: white;
-            padding: 1rem 0;
-            text-align: center;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo {
+            font-size: 1.5rem;
+        }
+        .menu {
+            position: relative;
+        }
+        .menu-icon {
+            cursor: pointer;
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            right: 0;
+            background-color: white;
+            color: black;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        .dropdown-content a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-content a:hover {
+            background-color: #ddd;
+        }
+        .menu:hover .dropdown-content {
+            display: block;
         }
         .container {
             max-width: 800px;
@@ -84,7 +116,15 @@
 </head>
 <body>
     <header>
-        <h1>Flight Search Engine</h1>
+        <div class="logo">Logo</div>
+        <div class="menu">
+            <div class="menu-icon">☰</div>
+            <div class="dropdown-content">
+                <a href="#">Link 1</a>
+                <a href="#">Link 2</a>
+                <a href="#">Link 3</a>
+            </div>
+        </div>
     </header>
     <div class="container">
         <form id="flight-search-form">
@@ -131,6 +171,9 @@
         </form>
         <div id="results"></div>
     </div>
+    <footer>
+        <p>&copy; 2024 Flight Search Engine</p>
+    </footer>
     <script src="main.js"></script>
 </body>
 </html>
