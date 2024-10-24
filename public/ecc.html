@@ -24,6 +24,15 @@
     <!-- Template Stylesheet -->
     <link href="https://crestwavebd.github.io/mj/ecom/css/style.css" rel="stylesheet">
     <style>
+        @media (max-width: 768px) {
+    .navbar-brand {
+        flex-grow: 1;
+        text-align: left;
+    }
+    .navbar-toggler {
+        margin-left: auto;
+    }
+}
         body {
             font-family: Arial, sans-serif;
             background-color: #f4f4f4;
@@ -120,11 +129,13 @@
     <!-- Nav Bar Start -->
     <div class="nav">
         <div class="container-fluid">
-            <nav class="navbar navbar-expand-md bg-dark navbar-dark">
-                <a href="#" class="navbar-brand">MENU</a>
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
+           <nav class="navbar navbar-expand-md bg-dark navbar-dark">
+    <div class="d-flex justify-content-between w-100">
+        <a href="#" class="navbar-brand">Menu</a>
+        <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbarCollapse">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
 
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto">
