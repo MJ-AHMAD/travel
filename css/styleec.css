@@ -6,20 +6,20 @@
             background-color: white;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-        form-1 {
+        form {
             display: flex;
             flex-wrap: wrap;
             gap: 1rem;
         }
-        .form-group-1 {
+        .form-group {
             flex: 1 1 calc(50% - 1rem);
             display: flex;
             flex-direction: column;
         }
-        label-1 {
+        label {
             margin-bottom: 0.5rem;
         }
-        input-1, select-1, button-1 {
+        input, select, button-1 {
             padding: 0.5rem;
             border: 1px solid #ccc;
             border-radius: 4px;
@@ -36,30 +36,30 @@
         button-1:hover {
             background-color: #0056b3;
         }
-        #results-1 {
+        #results {
             margin-top: 2rem;
         }
-        .flight-offer-1 {
+        .flight-offer {
             border: 1px solid #ccc;
             padding: 1rem;
             margin-bottom: 1rem;
             border-radius: 4px;
             background-color: #f8f8f8;
         }
-        .flight-offer-1 h3 {
+        .flight-offer h3 {
             margin: 0 0 1rem;
         }
-        .flight-offer-1 div {
+        .flight-offer div {
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
         }
-        .left-1, .right-1 {
+        .left, .right {
             flex: 1;
             min-width: 200px;
             box-sizing: border-box;
         }
-        .right-1 p {
+        .right p {
             text-align: right;
         }
   
