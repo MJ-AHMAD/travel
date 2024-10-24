@@ -116,6 +116,40 @@
         footer {
             justify-content: center; /* Centering the footer content */
         }
+        .info-section {
+            background-color: white;
+            padding: 1rem;
+            border-top: 1px solid #ccc;
+            border-bottom: 1px solid #ccc;
+        }
+        .info-section div {
+            margin-bottom: 1rem;
+        }
+        .info-section h2 {
+            margin-bottom: 0.5rem;
+        }
+        .info-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .info-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        .info-section ul li a {
+            color: black;
+            text-decoration: none;
+        }
+        .info-section ul li a:hover {
+            text-decoration: underline;
+        }
+        .payment-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .payment-icons img {
+            height: 40px;
+        }
     </style>
 </head>
 <body>
@@ -174,6 +208,46 @@
             <button type="submit">Search Flights</button>
         </form>
         <div id="results"></div>
+    </div>
+    <div class="info-section">
+        <div>
+            <h2>About</h2>
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Best Price Guarantee</a></li>
+                <li><a href="#">Terms and Conditions</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Cookie Policy</a></li>
+                <li><a href="#">Blog</a></li>
+                <li><a href="#">Help</a></li>
+                <li><a href="#">FAQS</a></li>
+                <li><a href="#">Easy EMI</a></li>
+                <li><a href="#">Payment Methods</a></li>
+                <li><a href="#">Contact Us</a></li>
+            </ul>
+        </div>
+        <div>
+            <h2>Have Questions?</h2>
+            <p>+88-09617-111-888</p>
+            <p>sales@flightexpert.com</p>
+        </div>
+        <div>
+            <h2>Accepted Payments</h2>
+            <div class="payment-icons">
+                <img src="path/to/visa-logo.png" alt="VISA">
+                <img src="path/to/mastercard-logo.png" alt="Mastercard">
+                <img src="path/to/amex-logo.png" alt="American Express">
+                <img src="path/to/brac-bank-logo.png" alt="BRAC Bank">
+                <img src="path/to/dbbl-nexus-logo.png" alt="DBBL Nexus">
+                <img src="path/to/mycash-logo.png" alt="MYCash">
+                <img src="path/to/citytouch-logo.png" alt="Citytouch">
+                <img src="path/to/bank-asia-logo.png" alt="Bank Asia">
+                <img src="path/to/takapay-logo.png" alt="TakaPay">
+                <img src="path/to/cash-logo.png" alt="Cash">
+                <img src="path/to/nagad-logo.png" alt="Nagad">
+                <img src="path/to/fastcash-logo.png" alt="Fastcash">
+            </div>
+        </div>
     </div>
     <footer>
         <p>&copy; 2024 Flight Search Engine</p>
